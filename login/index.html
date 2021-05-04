@@ -16,14 +16,15 @@
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
             <h2 class="title">Sign in</h2>
-            <div class="input-field">
+            <div style="width: 500px" id="reader"></div>
+            <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Password" />
-            </div>
+            </div> -->
             <!-- <input type="submit" class="btn solid" name="" value="login"> -->
             <a href="../back" class="btn solid" ><p style="margin-left: 50px; margin-top:12px;">Login</p></a>
             <!-- <a href="../back"><input type="submit" value="Login" class="btn solid" /></a> -->
@@ -106,5 +107,39 @@
     </div>
 
     <script src="app.js"></script>
+    <script src="js_scan/src/html5-qrcode-scanner.js"></script>
+    <script src="html5-qrcode.min.js"></script>
+    <script type="text/javascript">
+      function onScanSuccess(qrCodeMessage) {
+        // handle on success condition with the decoded message
+      }
+
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 250 });
+      html5QrcodeScanner.render(onScanSuccess);
+
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+          "reader", { fps: 10, qrbox: 250 });
+              
+      function onScanSuccess(qrCodeMessage) {
+          // handle on success condition with the decoded message
+          html5QrcodeScanner.clear();
+          // ^ this will stop the scanner (video feed) and clear the scan area.
+      }
+
+      html5QrcodeScanner.render(onScanSuccess);
+
+      function onScanSuccess(qrCodeMessage) {
+          // handle on success condition with the decoded message
+      }
+
+      function onScanError(errorMessage) {
+          // handle on error condition, with error message
+      }
+
+      var html5QrcodeScanner = new Html5QrcodeScanner(
+          "reader", { fps: 10, qrbox: 250 });
+      html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
   </body>
 </html>
