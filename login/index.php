@@ -17,6 +17,7 @@
           <form action="#" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div style="width: 500px" id="reader"></div>
+            <!-- <iframe src="http://localhost/green_electricity/login/index.html"></iframe> -->
             <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Username" />
@@ -108,38 +109,26 @@
 
     <script src="app.js"></script>
     <script src="js_scan/src/html5-qrcode-scanner.js"></script>
-    <script src="html5-qrcode.min.js"></script>
+    <script src="js_scan/src/html5-qrcode.js"></script>
+    <script type="js_scan/minified/html5-qrcode.min.js"></script>
+    <script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
     <script type="text/javascript">
-      function onScanSuccess(qrCodeMessage) {
-        // handle on success condition with the decoded message
-      }
+      function onScanSuccess(qrMessage) {
+      // handle the scanned code as you like, for example:
+      console.log(`QR matched = ${qrMessage}`);
+    }
 
-      var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", { fps: 10, qrbox: 250 });
-      html5QrcodeScanner.render(onScanSuccess);
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      // for example:
+      console.warn(`QR error = ${error}`);
+    }
 
-      var html5QrcodeScanner = new Html5QrcodeScanner(
-          "reader", { fps: 10, qrbox: 250 });
-              
-      function onScanSuccess(qrCodeMessage) {
-          // handle on success condition with the decoded message
-          html5QrcodeScanner.clear();
-          // ^ this will stop the scanner (video feed) and clear the scan area.
-      }
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", { fps: 10, qrbox: 250 }, /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
-      html5QrcodeScanner.render(onScanSuccess);
-
-      function onScanSuccess(qrCodeMessage) {
-          // handle on success condition with the decoded message
-      }
-
-      function onScanError(errorMessage) {
-          // handle on error condition, with error message
-      }
-
-      var html5QrcodeScanner = new Html5QrcodeScanner(
-          "reader", { fps: 10, qrbox: 250 });
-      html5QrcodeScanner.render(onScanSuccess, onScanError);
+    const html5QrCode = new Html5Qrcode("reader", /* verbose= */ true);
     </script>
   </body>
 </html>
