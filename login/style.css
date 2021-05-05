@@ -280,6 +280,7 @@ form.sign-in-form {
     top: 95%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
+    margin-top: 300px;
   }
 
   .signin-signup,
@@ -371,6 +372,10 @@ form.sign-in-form {
     top: 5%;
     transform: translate(-50%, 0);
   }
+
+  .title{
+    margin-top: 600px;
+  }
 }
 
 @media (max-width: 570px) {
@@ -396,5 +401,9 @@ form.sign-in-form {
   .container.sign-up-mode:before {
     bottom: 28%;
     left: 50%;
+  }
+
+  .title{
+    margin-top: 600px;
   }
 }

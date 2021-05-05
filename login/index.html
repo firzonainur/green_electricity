@@ -15,9 +15,8 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
-            <h2 class="title">Sign in</h2>
-            <div style="width: 500px" id="reader"></div>
-            <!-- <iframe src="http://localhost/green_electricity/login/index.html"></iframe> -->
+
+            <h2 class="title" style="text-align: center;">Silahkan Scan Kartu Untuk Login</h2>
             <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Username" />
@@ -26,6 +25,8 @@
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Password" />
             </div> -->
+            <video id="preview" class="input-field" style="width: 300px; height: 200px; border-radius: 0px;"></video>
+            
             <!-- <input type="submit" class="btn solid" name="" value="login"> -->
             <a href="../back" class="btn solid" ><p style="margin-left: 50px; margin-top:12px;">Login</p></a>
             <!-- <a href="../back"><input type="submit" value="Login" class="btn solid" /></a> -->
@@ -108,27 +109,24 @@
     </div>
 
     <script src="app.js"></script>
-    <script src="js_scan/src/html5-qrcode-scanner.js"></script>
-    <script src="js_scan/src/html5-qrcode.js"></script>
-    <script type="js_scan/minified/html5-qrcode.min.js"></script>
-    <script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
-    <script type="text/javascript">
-      function onScanSuccess(qrMessage) {
-      // handle the scanned code as you like, for example:
-      console.log(`QR matched = ${qrMessage}`);
-    }
+    <script src="jquery.min.js"></script>
+    <script src="instascan.min.js"></script>
+    <script>
+      let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+      scanner.addListener('scan', function(content){
 
-    function onScanFailure(error) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      console.warn(`QR error = ${error}`);
-    }
+        alert(content);
+      });
 
-    let html5QrcodeScanner = new Html5QrcodeScanner(
-      "reader", { fps: 10, qrbox: 250 }, /* verbose= */ false);
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-
-    const html5QrCode = new Html5Qrcode("reader", /* verbose= */ true);
+      Instascan.Camera.getCameras().then(function(cameras){
+        if(cameras.length > 0) {
+          scanner.start(cameras[0]);
+        }else{
+          console.error('No cameras found');
+        }
+      }).catch(function(e){
+        console.error(e);
+      });
     </script>
   </body>
 </html>
